@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Trivia Sejarah</title> 
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: black;
+            color: gray;
+        }
+        #question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #options {
+            display: flex;
+            justify-content: center;
+        }
+        .option {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .option:hover {
+            background-color: #ccc;
+        }
+    </style> 
+ </head> 
+ <body> 
+  <h1>Trivia Sejarah</h1> 
+  <div id="question">
+   Pertanyaan akan muncul di sini.
+  </div> 
+  <div id="options"> 
+   <div class="option" onclick="checkAnswer(this)">
+    Jawaban A
+   </div> 
+   <div class="option" onclick="checkAnswer(this)">
+    Jawaban B
+   </div> 
+   <div class="option" onclick="checkAnswer(this)">
+    Jawaban C
+   </div> 
+   <div class="option" onclick="checkAnswer(this)">
+    Jawaban D
+   </div> 
+  </div> 
+  <script>
+        var questions = [
+            {
+                question: "Siapakah presiden pertama Amerika Serikat?",
+                options: ["George Washington", "Thomas Jefferson", "Abraham Lincoln", "John Adams"],
+                answer: 0
+            },
+            {
+                question: "Kapan Perang Dunia II dimulai?",
+                options: ["1914", "1939", "1945", "1950"],
+                answer: 1
+            },
+            {
+                question: "Siapakah penemu lampu pijar?",
+                options: ["Thomas Edison", "Albert Einstein", "Isaac Newton", "Nikola Tesla"],
+                answer: 0
+            },
+            {
+                question: "Apa nama ibukota Jepang?",
+                options: ["Tokyo", "Osaka", "Kyoto", "Hiroshima"],
+                answer: 0
+            },
+            {
+                question: "Siapakah penulis buku 'The Great Gatsby'?",
+                options: ["F. Scott Fitzgerald", "Ernest Hemingway", "Mark Twain", "William Faulkner"],
+                answer: 0
+            }
+        ];
+
+        var currentQuestion = 0;
+
+        function loadQuestion() {
+            var questionElement = document.getElementById('question');
+            questionElement.textContent = questions[currentQuestion].question;
+
+            var optionsElement = document.getElementById('options');
+            optionsElement.innerHTML = '';
+            for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+                var option = document.createElement('div');
+                option.classList.add('option');
+                option.textContent = questions[currentQuestion].options[i];
+                option.setAttribute('onclick', 'checkAnswer(this)');
+                optionsElement.appendChild(option);
+            }
+        }
+
+        function checkAnswer(selectedOption) {
+            var selectedIndex = Array.prototype.indexOf.call(selectedOption.parentNode.children, selectedOption);
+            if (selectedIndex === questions[currentQuestion].answer) {
+                alert('Jawaban Benar!');
+            } else {
+                alert('Jawaban Salah! Jawaban yang benar adalah: ' + questions[currentQuestion].options[questions[currentQuestion].answer]);
+            }
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                alert('Game Selesai!');
+            }
+        }
+
+        // Memuat pertanyaan pertama saat halaman dimuat
+        loadQuestion();
+    </script> 
+ 
+</body></html>
